@@ -5,6 +5,6 @@ export interface GlobalResponseBody {
   categories: string[]
 }
 
-export function fetchGlobalResponseBody(): Promise<GlobalResponseBody> {
+export function fetchGlobalData(): Promise<GlobalResponseBody> {
   return ky(baseURL + '/api/global').json()
 }
