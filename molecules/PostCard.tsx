@@ -10,10 +10,9 @@ interface PostCardProps {
     title: string
     category: string
     tags: string[]
-    content: string
     icon: string
     name: string
-    date: Date
+    date: string
   }
 }
 

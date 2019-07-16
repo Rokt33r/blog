@@ -1,21 +1,13 @@
 import React from 'react'
-import Box from '../../atoms/Box'
 import DefaultTemplate from '../../templates/DefaultTemplate'
-import { fetchPostsIndexResponseBody } from '../../api/posts'
+import {
+  fetchPostsIndexResponseBody,
+  PostsIndexResponseBody
+} from '../../api/posts'
 import PostCard from '../../molecules/PostCard'
 
 interface PostsListPageProps {
-  data: {
-    posts: {
-      title: string
-      category: string
-      tags: string[]
-      content: string
-      icon: string
-      name: string
-      date: Date
-    }[]
-  }
+  data: PostsIndexResponseBody
 }
 
 const PostsListPage = ({ data }: PostsListPageProps) => (

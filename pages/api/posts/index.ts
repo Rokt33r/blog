@@ -1,8 +1,9 @@
 import { prismy } from 'prismy'
 import { getPostsData } from '../../../lib/posts'
+import { PostsIndexResponseBody } from '../../../api/posts'
 
 class PostIndexHandler {
-  async handle() {
+  async handle(): Promise<PostsIndexResponseBody> {
     const { posts } = getPostsData()
     return {
       posts: [...posts].map(([, post]) => post)

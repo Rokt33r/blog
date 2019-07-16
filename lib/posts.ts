@@ -4,11 +4,13 @@ interface SerializedPostsData {
   posts: [
     string,
     {
-      title: string
-      tags: string[]
-      content: string
       icon: string
       name: string
+      title: string
+      tags: string[]
+      category: string
+      date: string
+      content: string
     }
   ][]
   byTag: [string, string[]][]
