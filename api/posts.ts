@@ -1,6 +1,5 @@
 import ky from 'ky-universal'
-
-const baseURL = 'http://localhost:3000'
+import { baseURL } from '../lib/consts'
 
 export interface PostsIndexResponseBody {
   posts: {
