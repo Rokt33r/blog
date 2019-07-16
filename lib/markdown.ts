@@ -1,6 +1,7 @@
 import unified from 'unified'
 import remarkParse from 'remark-parse'
 import remarkFrontmatter from 'remark-frontmatter'
+import remarkReact from 'remark-react'
 import yaml from 'js-yaml'
 import { Node, Parent, Literal } from 'unist'
 import { pipe } from 'ramda'
@@ -10,11 +11,18 @@ export const parseFrontmatter = pipe(
   extractYaml
 )
 
-const markdownProcessor = unified()
+const markdownFrontmatterParser = unified()
   .use(remarkParse)
   .use(remarkFrontmatter)
 function parseMarkdown(content: string) {
-  return markdownProcessor.runSync(markdownProcessor.parse(content))
+  return markdownFrontmatterParser.runSync(
+    markdownFrontmatterParser.parse(content)
+  )
+}
+
+const markdownReactProcessor = markdownFrontmatterParser().use(remarkReact)
+export function convertMarkdownToReact(content: string) {
+  return markdownReactProcessor.processSync(content)
 }
 
 function extractYaml<P extends Node>(node: P) {

@@ -1,12 +1,14 @@
 import React from 'react'
 import DefaultTemplate from '../../templates/DefaultTemplate'
 import {
-  fetchPostsIndexResponseBody,
   PostsShowResponseBody,
   fetchPostsShowResponseBody
 } from '../../api/posts'
-import PostCard from '../../molecules/PostCard'
 import { NextPageContext } from 'next'
+import Box from '../../atoms/Box'
+import Heading from '../../atoms/Heading'
+import Flex from '../../atoms/Flex'
+import { convertMarkdownToReact } from '../../lib/markdown'
 
 interface PostsListPageProps {
   data: PostsShowResponseBody
@@ -14,7 +16,16 @@ interface PostsListPageProps {
 
 const PostsShowPage = ({ data }: PostsListPageProps) => (
   <DefaultTemplate>
-    <h1>{data.post.title}</h1>
+    <Heading as="h1" fontSize={6}>
+      {data.post.title}
+    </Heading>
+    <Box>{data.post.category}</Box>
+    <Flex>
+      {data.post.tags.map(tag => (
+        <Box key={tag}>{tag}</Box>
+      ))}
+    </Flex>
+    <Box>{convertMarkdownToReact(data.post.content).contents}</Box>
   </DefaultTemplate>
 )
 

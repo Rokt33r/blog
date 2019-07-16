@@ -27,6 +27,7 @@
     "react-dom": "^16.8.6",
     "remark-frontmatter": "^1.3.2",
     "remark-parse": "^6.0.3",
+    "remark-react": "^5.0.1",
     "styled-components": "^4.3.2",
     "styled-system": "^5.0.12",
     "tachijs": "^1.0.0-2",
