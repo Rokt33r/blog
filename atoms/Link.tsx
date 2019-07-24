@@ -1,15 +1,13 @@
-import Text, { TextProps } from './Text'
-import styled from 'styled-components'
+import NextLink from 'next/link'
+import BaseLink, { BaseLinkProps } from './BaseLink'
 
-interface LinkProps extends TextProps {
-  as?: keyof JSX.IntrinsicElements | React.ComponentType<any>
+interface LinkProps extends BaseLinkProps {
+  href: string
+  children: React.ReactNode
 }
 
-const Link = styled(Text)<LinkProps>({})
-
-Link.defaultProps = {
-  as: 'a',
-  color: 'blue'
-}
-
-export default Link
+export default ({ href, children }: LinkProps) => (
+  <NextLink href={href} passHref={true}>
+    <BaseLink>{children}</BaseLink>
+  </NextLink>
+)
