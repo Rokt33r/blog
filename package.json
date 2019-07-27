@@ -7,6 +7,8 @@
   "scripts": {
     "dev": "next",
     "start": "next start",
+    "lint": "prettier --check ./**/*.{ts,tsx,md}",
+    "format": "prettier --write ./**/*.{ts,tsx,md}",
     "build": "npm run generate-posts-json && next build",
     "generate-posts-json": "ts-node -T -P tsconfig.node.json scripts/generatePostsJSON.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
