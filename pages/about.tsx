@@ -1,5 +1,6 @@
 import React from 'react'
 import DefaultTemplate from '../templates/DefaultTemplate'
+import Link from '../atoms/Link'
 
 const AboutPage = () => (
   <DefaultTemplate>
@@ -71,16 +72,22 @@ const AboutPage = () => (
     <h2>Current Projects</h2>
     <ul>
       <li>
-        [Boostnote](https://github.com/BoostIO/Boostnote)(Project owner) : Note
-        app for developers.
+        <Link href='https://github.com/BoostIO/Boostnote' newTab>
+          Boostnote
+        </Link>{' '}
+        (Project owner) : Note app for developers.
       </li>
       <li>
-        [Prismy](https://github.com/prismyland)(Project owner) : Simple server
-        library written in Typescript.
+        <Link href='https://github.com/prismyland' newTab>
+          Prismy
+        </Link>{' '}
+        (Project owner) : Simple server library written in Typescript.
       </li>
       <li>
-        [Remark.js](https://github.com/remarkjs/remark)(Contributor) : Markdown
-        processor library.
+        <Link href='https://github.com/remarkjs/remark' newTab>
+          Remark.js
+        </Link>{' '}
+        (Contributor) : Markdown processor library.
       </li>
     </ul>
   </DefaultTemplate>
