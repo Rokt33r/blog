@@ -8,12 +8,7 @@ interface LinkElementProps extends TextProps {
   target?: '_blank'
 }
 
-const LinkElement = styled(Text)<LinkElementProps>({
-  color: 'inherit',
-  '&:hover': {
-    color: 'blue'
-  }
-})
+const LinkElement = styled(Text).attrs({ color: 'blue' })<LinkElementProps>``
 
 interface LinkProps {
   href: string
