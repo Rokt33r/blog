@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import Box from './Box'
 
 const Container = styled(Box)({
-  maxWidth: '1024px'
+  maxWidth: '52em'
 })
 
 Container.defaultProps = {
