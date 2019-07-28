@@ -10,7 +10,7 @@ interface DefaultTemplateProps {
 export default ({ children }: DefaultTemplateProps) => (
   <Flex>
     <Navigator />
-    <Container mx="auto" px={4} pt={4} pb={6} width={1}>
+    <Container mx='auto' px={4} pt={4} pb={6} width={1}>
       {children}
     </Container>
   </Flex>
