@@ -32,7 +32,15 @@ const theme = {
       backgroundColor: colors.blue
     }
   },
-  colors
+  colors,
+  textStyles: {
+    monospace: {
+      fontFamily: `'Ubuntu Mono', monospace`
+    },
+    sansSerif: {
+      fontFamily: 'Ubuntu, sans-serif'
+    }
+  }
 }
 
 const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
@@ -40,7 +48,7 @@ const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
   body {
     margin: 0;
     color: ${colors.black};
-    font-family: Ubuntu, sans-serif;
+    font-family: ${theme.textStyles.sansSerif.fontFamily};
     line-height: 1.625;
   }
 `
