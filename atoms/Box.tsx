@@ -13,7 +13,8 @@ import {
   flex,
   order,
   alignSelf,
-  color
+  color,
+  compose
 } from 'styled-system'
 
 export interface BoxProps
@@ -23,12 +24,9 @@ export interface BoxProps
     FlexProps,
     OrderProps,
     AlignSelfProps,
-    ColorProps {
-  boxStyle?: string
-}
+    ColorProps {}
 
-const Box = styled.div<BoxProps>(
-  { boxSizing: 'border-box' },
+export const boxStyle = compose(
   space,
   width,
   fontSize,
@@ -37,5 +35,7 @@ const Box = styled.div<BoxProps>(
   order,
   alignSelf
 )
+
+const Box = styled.div<BoxProps>({ boxSizing: 'border-box' }, boxStyle)
 
 export default Box
