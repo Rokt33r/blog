@@ -13,7 +13,7 @@ interface HomePageProps {
 const HomePage = ({ data }: HomePageProps) => (
   <DefaultTemplate>
     <header>
-      <h1>Rokt33r's blog</h1>
+      <h1>Rokt33r's Lab</h1>
       <p>Mainly talking about Typescript, Node.js, React.js and Markdown.</p>
     </header>
     <section>
