@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Box, { BoxProps } from './Box'
+import Box, { BoxProps, boxStyle } from './Box'
 import {
   FontFamilyProps,
   FontWeightProps,
@@ -10,8 +10,10 @@ import {
   fontFamily,
   textAlign,
   lineHeight,
-  letterSpacing
+  letterSpacing,
+  compose
 } from 'styled-system'
+import { TextDecorationProps, textDecoration } from '../lib/styles'
 
 export interface TextProps
   extends BoxProps,
@@ -19,14 +21,19 @@ export interface TextProps
     FontWeightProps,
     TextAlignProps,
     LineHeightProps,
-    LetterSpacingProps {}
+    LetterSpacingProps,
+    TextDecorationProps {}
 
-const Text = styled(Box)<TextProps>(
+export const textStyle = compose(
+  boxStyle,
   fontFamily,
   fontWeight,
   textAlign,
   lineHeight,
-  letterSpacing
+  letterSpacing,
+  textDecoration
 )
+
+const Text = styled(Box)<TextProps>(textStyle)
 
 export default Text
