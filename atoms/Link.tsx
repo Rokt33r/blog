@@ -1,10 +1,10 @@
 import NextLink from 'next/link'
 import styled, { CSSProp } from 'styled-components'
-import { TextProps, textStyle } from './Text'
+import { TextProps, composedTextStyle } from './Text'
 
 interface LinkElementProps extends TextProps {}
 
-const LinkElement = styled.a<LinkElementProps>(textStyle)
+const LinkElement = styled.a<LinkElementProps>(composedTextStyle)
 LinkElement.defaultProps = {
   color: 'blue'
 }

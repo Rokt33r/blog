@@ -26,7 +26,7 @@ export interface BoxProps
     AlignSelfProps,
     ColorProps {}
 
-export const boxStyle = compose(
+export const composedBoxStyle = compose(
   space,
   width,
   fontSize,
@@ -36,6 +36,6 @@ export const boxStyle = compose(
   alignSelf
 )
 
-const Box = styled.div<BoxProps>({ boxSizing: 'border-box' }, boxStyle)
+const Box = styled.div<BoxProps>({ boxSizing: 'border-box' }, composedBoxStyle)
 
 export default Box
