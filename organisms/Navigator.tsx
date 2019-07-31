@@ -27,6 +27,15 @@ const Avartar = styled(Box).attrs({
   mr: 2
 })``
 
+const GithubIcon = styled(Box).attrs({
+  as: 'img',
+  src:
+    'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+  width: 20,
+  height: 20,
+  mr: 2
+})``
+
 interface NavLinkListItemProps extends BoxProps {
   href: string
   children: React.ReactNode
@@ -83,6 +92,10 @@ export default () => {
             ?category={category}
           </NavLinkListItem>
         ))}
+        <NavLinkListItem href='https://github.com/Rokt33r/blog' newTab>
+          <GithubIcon />
+          Github
+        </NavLinkListItem>
       </NavLinkList>
     </NavContainer>
   )
