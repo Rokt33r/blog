@@ -9,7 +9,7 @@ import {
 
 interface CardProps extends BoxProps, BorderProps, BorderRadiusProps {}
 
-const Card = styled(Box)<CardProps>({}, border, borderRadius)
+const Card = styled(Box).attrs({})<CardProps>({}, border, borderRadius)
 
 Card.defaultProps = {}
 
