@@ -13,7 +13,6 @@ interface LinkProps extends LinkElementProps {
   href: string
   newTab?: boolean
   children: React.ReactNode
-  css?: CSSProp
 }
 
 export default ({ href, children, newTab, ...props }: LinkProps) =>

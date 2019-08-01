@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { CSSProp } from 'styled-components'
 import {
   SpaceProps,
   WidthProps,
@@ -24,7 +24,9 @@ export interface BoxProps
     FlexProps,
     OrderProps,
     AlignSelfProps,
-    ColorProps {}
+    ColorProps {
+  css?: CSSProp
+}
 
 export const composedBoxStyle = compose(
   space,
