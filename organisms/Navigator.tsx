@@ -86,12 +86,6 @@ export default () => {
           Rokt33r's Lab
         </NavLinkListItem>
         <NavLinkListItem href='/about'>👨‍🚀 /about</NavLinkListItem>
-        <NavLinkListItem href='/posts'>✍️ /posts</NavLinkListItem>
-        {globalData.categories.map(category => (
-          <NavLinkListItem key={category} href={`/posts?category=${category}`}>
-            ?category={category}
-          </NavLinkListItem>
-        ))}
         <NavLinkListItem href='https://github.com/Rokt33r/blog' newTab>
           <GithubIcon />
           Github
