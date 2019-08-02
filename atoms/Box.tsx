@@ -38,6 +38,6 @@ export const composedBoxStyle = compose(
   alignSelf
 )
 
-const Box = styled.div<BoxProps>({ boxSizing: 'border-box' }, composedBoxStyle)
+const Box = styled.div<BoxProps>({}, composedBoxStyle)
 
 export default Box
