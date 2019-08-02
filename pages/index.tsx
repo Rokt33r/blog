@@ -5,6 +5,7 @@ import {
   PostsIndexResponseBody
 } from '../api/posts'
 import PostCard from '../molecules/PostCard'
+import Heading from '../atoms/Heading'
 
 interface HomePageProps {
   data: PostsIndexResponseBody
@@ -13,7 +14,7 @@ interface HomePageProps {
 const HomePage = ({ data }: HomePageProps) => (
   <DefaultTemplate>
     <header>
-      <h1>Rokt33r's Lab</h1>
+      <Heading depth={1}>Rokt33r's Lab</Heading>
       <p>Mainly talking about Typescript, Node.js, React.js and Markdown.</p>
     </header>
     <section>
