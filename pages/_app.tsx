@@ -53,7 +53,7 @@ const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
   }
 `
 
-interface MyAppProps {
+interface MyAppProps extends AppProps {
   globalData: GlobalResponseBody
 }
 
