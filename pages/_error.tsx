@@ -1,5 +1,6 @@
 import React from 'react'
 import { NextPageContext } from 'next'
+import DefaultTemplate from '../templates/DefaultTemplate'
 
 export default class ErrorPage extends React.Component<{ statusCode: number }> {
   static getInitialProps({ res, err }: NextPageContext) {
@@ -9,12 +10,14 @@ export default class ErrorPage extends React.Component<{ statusCode: number }> {
 
   render() {
     return (
-      <p>
-        Custom error page
-        {this.props.statusCode
-          ? `An error ${this.props.statusCode} occurred on server`
-          : 'An error occurred on client'}
-      </p>
+      <DefaultTemplate>
+        <h1>Error!</h1>
+        <p>
+          {this.props.statusCode != null
+            ? `An error ${this.props.statusCode} occurred while fetching page data`
+            : 'An error occurred on client'}
+        </p>
+      </DefaultTemplate>
     )
   }
 }
