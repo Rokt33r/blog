@@ -1,7 +1,6 @@
 import React from 'react'
 import Box, { BoxProps } from '../atoms/Box'
 import Link from '../atoms/Link'
-import { useGlobalData } from '../lib/global'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 
@@ -68,6 +67,7 @@ const NavLinkListItem = ({
           transition: background-color ease-in-out 200ms;
           &:hover {
             background-color: rgba(0, 0, 0, 0.1);
+            text-decoration: none;
           }
         `}
       />
@@ -76,8 +76,6 @@ const NavLinkListItem = ({
 }
 
 export default () => {
-  const globalData = useGlobalData()
-
   return (
     <NavContainer width={[1, 256]}>
       <NavLinkList>
