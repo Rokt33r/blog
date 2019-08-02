@@ -9,10 +9,9 @@ interface HeadingProps extends TextProps {
 const Heading = styled(Text).attrs(({ depth = 2, fontSize }: HeadingProps) => ({
   as: `h${depth}`,
   fontSize: fontSize != null ? fontSize : 6 - depth
-}))<HeadingProps>({})
+}))<HeadingProps>``
 
 Heading.defaultProps = {
-  m: 0,
   fontWeight: 'bold'
 }
 
