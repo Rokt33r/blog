@@ -7,8 +7,9 @@ import {
 import { NextPageContext } from 'next'
 import Box from '../../atoms/Box'
 import Heading from '../../atoms/Heading'
-import Flex from '../../atoms/Flex'
 import { convertMarkdownToReact } from '../../lib/markdown'
+import PostMeta from '../../molecules/PostMeta'
+import Link from '../../atoms/Link'
 
 interface PostsListPageProps {
   data: PostsShowResponseBody
@@ -16,15 +17,16 @@ interface PostsListPageProps {
 
 const PostsShowPage = ({ data }: PostsListPageProps) => (
   <DefaultTemplate>
-    <Heading as="h1" fontSize={6}>
+    <Box mt={3}>
+      <Link href='/'>Home</Link>
+    </Box>
+
+    <Heading depth={1} fontSize={6} mt={0} mb={3}>
       {data.post.title}
     </Heading>
-    <Box>{data.post.category}</Box>
-    <Flex>
-      {data.post.tags.map(tag => (
-        <Box key={tag}>{tag}</Box>
-      ))}
-    </Flex>
+
+    <PostMeta post={data.post} px={2} mb={4} />
+
     <Box>{convertMarkdownToReact(data.post.content).contents}</Box>
   </DefaultTemplate>
 )
