@@ -4,7 +4,13 @@ import { TextProps, composedTextStyle } from './Text'
 
 interface LinkElementProps extends TextProps {}
 
-const LinkElement = styled.a<LinkElementProps>(composedTextStyle)
+const LinkElement = styled.a<LinkElementProps>`
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+  ${composedTextStyle}
+`
 LinkElement.defaultProps = {
   color: 'blue'
 }
