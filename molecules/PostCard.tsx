@@ -8,6 +8,7 @@ import { format } from 'date-fns'
 import Link from '../atoms/Link'
 import Icon from '@mdi/react'
 import { mdiFileTree } from '@mdi/js'
+import PostMeta from './PostMeta'
 
 interface PostCardProps {
   post: {
@@ -38,7 +39,7 @@ const CardLink = styled(Link)`
 export default ({ post }: PostCardProps) => (
   <CardContainer px={2} pt={1} pb={2}>
     <Flex alignItems='center'>
-      <Heading depth={2} fontSize={3} css={{ flex: 1 }}>
+      <Heading depth={2} fontSize={3} css={{ flex: 1 }} m={0}>
         {post.icon}{' '}
         <CardLink href={`/posts/${post.name}`}>
           <span className='title'>{post.title}</span>
@@ -46,20 +47,6 @@ export default ({ post }: PostCardProps) => (
       </Heading>
       <Text fontSize={0}>{format(post.date, 'MMM Do, YYYY')}</Text>
     </Flex>
-    <Flex alignItems='center' px={2}>
-      <Icon path={mdiFileTree} size='12px' />
-      <Text ml={1} mr={2} fontSize={0}>
-        <CardLink href={`/posts?category=${post.category}`}>
-          {post.category}
-        </CardLink>
-      </Text>
-      <Flex mr={2}>
-        {post.tags.map(tag => (
-          <Text py={0} mx={1} fontSize={0}>
-            <CardLink href={`/posts?tag=${tag}`}>#{tag}</CardLink>
-          </Text>
-        ))}
-      </Flex>
-    </Flex>
+    <PostMeta post={post} px={2} fontSize={0} />
   </CardContainer>
 )
