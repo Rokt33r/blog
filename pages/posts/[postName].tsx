@@ -7,9 +7,9 @@ import {
 import { NextPageContext } from 'next'
 import Box from '../../atoms/Box'
 import Heading from '../../atoms/Heading'
-import { convertMarkdownToReact } from '../../lib/markdown'
 import PostMeta from '../../molecules/PostMeta'
 import Link from '../../atoms/Link'
+import MarkdownBox from '../../atoms/MarkdownBox'
 
 interface PostsListPageProps {
   data: PostsShowResponseBody
@@ -27,7 +27,7 @@ const PostsShowPage = ({ data }: PostsListPageProps) => (
 
     <PostMeta post={data.post} px={2} mb={4} />
 
-    <Box>{convertMarkdownToReact(data.post.content).contents}</Box>
+    <MarkdownBox>{data.post.content}</MarkdownBox>
   </DefaultTemplate>
 )
 

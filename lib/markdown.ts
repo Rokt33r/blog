@@ -1,7 +1,10 @@
+import React from 'react'
 import unified from 'unified'
 import remarkParse from 'remark-parse'
 import remarkFrontmatter from 'remark-frontmatter'
-import remarkReact from 'remark-react'
+import remarkRehype from 'remark-rehype'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeReact from 'rehype-react'
 import yaml from 'js-yaml'
 import { Node, Parent, Literal } from 'unist'
 import { pipe } from 'ramda'
@@ -20,7 +23,10 @@ function parseMarkdown(content: string) {
   )
 }
 
-const markdownReactProcessor = markdownFrontmatterParser().use(remarkReact)
+const markdownReactProcessor = markdownFrontmatterParser()
+  .use(remarkRehype)
+  .use(rehypeHighlight)
+  .use(rehypeReact as any, { createElement: React.createElement })
 export function convertMarkdownToReact(content: string) {
   return markdownReactProcessor.processSync(content)
 }
