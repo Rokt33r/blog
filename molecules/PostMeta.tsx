@@ -30,7 +30,7 @@ export default ({ post, fontSize, ...spaceProps }: PostMetaProps) => (
     </Text>
     <Flex mr={2}>
       {post.tags.map(tag => (
-        <Text py={0} mx={1} fontSize={fontSize}>
+        <Text py={0} mx={1} fontSize={fontSize} key={tag}>
           #{tag}
         </Text>
       ))}
