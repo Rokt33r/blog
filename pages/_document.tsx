@@ -36,6 +36,7 @@ export default class MyDocument extends Document {
             href='https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono:400,700&display=swap'
             rel='stylesheet'
           />
+          <link href='/static/highlight.js-style.css' rel='stylesheet' />
         </Head>
         <body>
           <Main />
