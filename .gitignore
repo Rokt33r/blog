@@ -2,3 +2,4 @@
 .next
 /generated/*
 !/generated/.gitkeep
+/out
