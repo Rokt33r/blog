@@ -1,5 +1,5 @@
 /node_modules
 .next
-/generated/*
-!/generated/.gitkeep
+/static/generated/*
+!/static/generated/.gitkeep
 /out
