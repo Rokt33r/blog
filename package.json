@@ -9,8 +9,9 @@
     "start": "next start",
     "lint": "prettier --check ./**/*.{ts,tsx,md}",
     "format": "prettier --write ./**/*.{ts,tsx,md}",
-    "build": "npm run generate-posts-json && next build",
-    "posts": "ts-node -T -P tsconfig.node.json scripts/generatePostsJSON.ts",
+    "build": "next build",
+    "export": "next export",
+    "posts": "ts-node -T -P tsconfig.node.json scripts/posts.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -28,6 +29,7 @@
     "ow-my-class": "^0.1.1",
     "prismy": "^0.12.1",
     "ramda": "^0.26.1",
+    "raw-loader": "^3.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rehype-highlight": "^3.0.0",
@@ -57,6 +59,7 @@
     "@types/typography": "^0.16.2",
     "babel-plugin-parameter-decorator": "^1.0.7",
     "babel-plugin-styled-components": "^1.10.5",
+    "del": "^5.0.0",
     "prettier": "^1.18.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2"

@@ -4,10 +4,16 @@ import Omc, { transform } from 'ow-my-class'
 import ow from 'ow'
 import util from 'util'
 import { parseFrontmatter } from '../lib/markdown'
+import { omit } from 'ramda'
+import del from 'del'
 
-const postsDirPath = path.join(process.cwd(), 'posts')
+const readFile = util.promisify(fs.readFile)
+const writeFile = util.promisify(fs.writeFile)
+
+const postsDirPath = path.join(process.cwd(), 'static/posts')
 
 async function run() {
+  await del(path.join(process.cwd(), 'static/generated/**/*.json'))
   const postFileNames = fs.readdirSync(postsDirPath)
   const posts = await Promise.all(
     postFileNames.map(async fileName => {
@@ -17,10 +23,12 @@ async function run() {
     })
   )
 
-  await Promise.resolve(posts)
-    .then(mapData)
-    .then(serializedData => JSON.stringify(serializedData, null, 2))
-    .then(writePostGeneratedJSON)
+  const postMap = await Promise.resolve(posts).then(mapData)
+
+  // Create all post list
+  await createAllPostList(postMap)
+  // Create post list by category
+  await createDataForEachCategory(postMap)
 }
 
 run()
@@ -32,7 +40,7 @@ run()
 
 async function readPostFile(fileName: string) {
   const filePath = path.join(postsDirPath, fileName)
-  const fileBuffer = await util.promisify(fs.readFile)(filePath)
+  const fileBuffer = await readFile(filePath)
 
   return fileBuffer.toString('utf-8')
 }
@@ -74,7 +82,13 @@ function validatePost(name: string, content: string) {
   )
 }
 
-function mapData(posts: Post[]) {
+interface PostMap {
+  posts: Map<string, Post>
+  byTag: Map<string, string[]>
+  byCategory: Map<string, string[]>
+}
+
+function mapData(posts: Post[]): PostMap {
   const data = {
     posts: new Map<string, Post>(),
     byTag: new Map<string, string[]>(),
@@ -100,16 +114,37 @@ function mapData(posts: Post[]) {
     postsWithCategory.push(post.name)
   })
 
-  return {
-    posts: [...data.posts.entries()],
-    byTag: [...data.byTag.entries()],
-    byCategory: [...data.byCategory.entries()]
-  }
+  return data
 }
 
-function writePostGeneratedJSON(stringifiedData: string) {
-  fs.writeFileSync(
-    path.join(process.cwd(), 'generated', 'posts.json'),
-    stringifiedData
+async function createAllPostList(postMap: PostMap) {
+  const posts = [...postMap.posts.values()].map(post => {
+    return omit(['content'], post)
+  })
+  const data = {
+    posts
+  }
+  return writeFileToGeneratedDir(`posts.json`, data)
+}
+
+async function createDataForEachCategory(postMap: PostMap) {
+  await Promise.all(
+    [...postMap.byCategory.entries()].map(([categoryName, postNameList]) => {
+      const posts = postNameList.map(postName => {
+        return omit(['content'], postMap.posts.get(postName))
+      })
+      const data = {
+        categoryName,
+        posts
+      }
+      return writeFileToGeneratedDir(`category-${categoryName}.json`, data)
+    })
+  )
+}
+
+async function writeFileToGeneratedDir(fileName: string, data: any) {
+  return writeFile(
+    path.join(process.cwd(), 'static', 'generated', fileName + '.json'),
+    JSON.stringify(data)
   )
 }
