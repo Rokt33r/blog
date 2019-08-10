@@ -58,22 +58,13 @@ interface MyAppProps extends AppProps {
 }
 
 export default class MyApp extends App<MyAppProps> {
-  static async getInitialProps({ Component, ctx }: AppContext) {
-    const [pageProps, globalData] = await Promise.all([
-      Component.getInitialProps ? Component.getInitialProps(ctx) : {},
-      fetchGlobalData()
-    ])
-
-    return { pageProps, globalData }
-  }
-
   render() {
     const { Component, pageProps, globalData } = this.props
 
     return (
       <Container>
         <ThemeProvider theme={theme}>
-          <GlobalDataContext.Provider value={globalData}>
+          <GlobalDataContext.Provider value={{}}>
             <GlobalStyle />
             <Component {...pageProps} />
           </GlobalDataContext.Provider>
