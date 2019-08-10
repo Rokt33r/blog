@@ -5,12 +5,12 @@
   "description": "Rokt33r's blog.",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "start": "next start",
+    "dev": "ts-node -T -P tsconfig.node.json node_modules/.bin/next",
+    "start": "ts-node -T -P tsconfig.node.json next start",
     "lint": "prettier --check ./**/*.{ts,tsx,md}",
     "format": "prettier --write ./**/*.{ts,tsx,md}",
-    "build": "next build",
-    "export": "next export",
+    "build": "ts-node -T -P tsconfig.node.json next build",
+    "export": "ts-node -T -P tsconfig.node.json next export",
     "posts": "ts-node -T -P tsconfig.node.json scripts/posts.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
