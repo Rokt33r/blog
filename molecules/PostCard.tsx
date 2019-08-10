@@ -5,9 +5,7 @@ import Flex from '../atoms/Flex'
 import Heading from '../atoms/Heading'
 import Text from '../atoms/Text'
 import { format } from 'date-fns'
-import Link from '../atoms/Link'
-import Icon from '@mdi/react'
-import { mdiFileTree } from '@mdi/js'
+import NextLink from 'next/link'
 import PostMeta from './PostMeta'
 
 interface PostCardProps {
@@ -28,7 +26,7 @@ const CardContainer = styled(Card)`
   }
 `
 
-const CardLink = styled(Link)`
+const CardLink = styled.a`
   color: inherit;
   text-decoration: none;
   &:hover {
@@ -41,9 +39,15 @@ export default ({ post }: PostCardProps) => (
     <Flex alignItems='center'>
       <Heading depth={2} fontSize={3} css={{ flex: 1 }} m={0}>
         {post.icon}{' '}
-        <CardLink href={`/posts/${post.name}`}>
-          <span className='title'>{post.title}</span>
-        </CardLink>
+        <NextLink
+          href={`/posts/[postName]?postName=${post.name}`}
+          as={`/posts/${post.name}`}
+          passHref
+        >
+          <CardLink>
+            <span className='title'>{post.title}</span>
+          </CardLink>
+        </NextLink>
       </Heading>
       <Text fontSize={0}>{format(post.date, 'MMM Do, YYYY')}</Text>
     </Flex>

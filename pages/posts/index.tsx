@@ -1,20 +1,18 @@
 import React from 'react'
 import DefaultTemplate from '../../templates/DefaultTemplate'
-import {
-  fetchPostsIndexResponseBody,
-  PostsIndexResponseBody
-} from '../../api/posts'
 import PostCard from '../../molecules/PostCard'
+import { PostWithoutContent } from '../../lib/types'
+import { getGeneratedJSONFile } from '../../lib/assets'
 
 interface PostsListPageProps {
-  data: PostsIndexResponseBody
+  posts: PostWithoutContent[]
 }
 
-const PostsListPage = ({ data }: PostsListPageProps) => (
+const PostsListPage = ({ posts }: PostsListPageProps) => (
   <DefaultTemplate>
     <h1>Posts list</h1>
     <div>
-      {data.posts.map(post => (
+      {posts.map(post => (
         <PostCard key={post.name} post={post} />
       ))}
     </div>
@@ -22,8 +20,7 @@ const PostsListPage = ({ data }: PostsListPageProps) => (
 )
 
 PostsListPage.getInitialProps = async () => {
-  const data = await fetchPostsIndexResponseBody()
-  return { data }
+  return getGeneratedJSONFile('posts')
 }
 
 export default PostsListPage

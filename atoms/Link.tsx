@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import styled, { CSSProp } from 'styled-components'
+import styled from 'styled-components'
 import { TextProps, composedTextStyle } from './Text'
 
 interface LinkElementProps extends TextProps {}
@@ -15,19 +15,20 @@ LinkElement.defaultProps = {
   color: 'blue'
 }
 
-interface LinkProps extends LinkElementProps {
+export interface LinkProps extends LinkElementProps {
   href: string
+  as?: string
   newTab?: boolean
   children: React.ReactNode
 }
 
-export default ({ href, children, newTab, ...props }: LinkProps) =>
+export default ({ href, as, children, newTab, ...props }: LinkProps) =>
   newTab ? (
     <LinkElement href={href} target='_blank' {...(props as any)}>
       {children}
     </LinkElement>
   ) : (
-    <NextLink href={href} passHref={true}>
+    <NextLink href={href} as={as} passHref={true}>
       <LinkElement {...(props as any)}>{children}</LinkElement>
     </NextLink>
   )

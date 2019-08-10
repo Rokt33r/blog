@@ -1,8 +1,6 @@
 import App, { Container, AppContext, AppProps } from 'next/app'
 import React from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { GlobalDataContext } from '../lib/global'
-import { fetchGlobalData, GlobalResponseBody } from '../api/global'
 
 const colors = {
   navy: '#001F3F',
@@ -53,21 +51,17 @@ const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
   }
 `
 
-interface MyAppProps extends AppProps {
-  globalData: GlobalResponseBody
-}
-
-export default class MyApp extends App<MyAppProps> {
+export default class MyApp extends App {
   render() {
-    const { Component, pageProps, globalData } = this.props
+    const { Component, pageProps } = this.props
 
     return (
       <Container>
         <ThemeProvider theme={theme}>
-          <GlobalDataContext.Provider value={{}}>
+          <>
             <GlobalStyle />
             <Component {...pageProps} />
-          </GlobalDataContext.Provider>
+          </>
         </ThemeProvider>
       </Container>
     )

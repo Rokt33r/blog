@@ -1,17 +1,15 @@
 import React from 'react'
 import DefaultTemplate from '../templates/DefaultTemplate'
-import {
-  fetchPostsIndexResponseBody,
-  PostsIndexResponseBody
-} from '../api/posts'
 import PostCard from '../molecules/PostCard'
 import Heading from '../atoms/Heading'
+import { getGeneratedJSONFile } from '../lib/assets'
+import { PostWithoutContent } from '../lib/types'
 
 interface HomePageProps {
-  data: PostsIndexResponseBody
+  posts: PostWithoutContent[]
 }
 
-const HomePage = ({ data }: HomePageProps) => (
+const HomePage = ({ posts }: HomePageProps) => (
   <DefaultTemplate>
     <header>
       <Heading depth={1}>Rokt33r's Lab</Heading>
@@ -20,7 +18,7 @@ const HomePage = ({ data }: HomePageProps) => (
     <section>
       <h2>Recent posts</h2>
       <div>
-        {data.posts.map(post => (
+        {posts.map(post => (
           <PostCard key={post.name} post={post} />
         ))}
       </div>
@@ -28,9 +26,8 @@ const HomePage = ({ data }: HomePageProps) => (
   </DefaultTemplate>
 )
 
-HomePage.getInitialProps = async () => {
-  const data = await fetchPostsIndexResponseBody()
-  return { data }
+HomePage.getInitialProps = () => {
+  return getGeneratedJSONFile('posts')
 }
 
 export default HomePage

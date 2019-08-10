@@ -6,6 +6,7 @@ import Link from '../atoms/Link'
 import Icon from '@mdi/react'
 import { mdiFileTree } from '@mdi/js'
 import { SpaceProps, FontSizeProps } from 'styled-system'
+import NextLink from 'next/link'
 
 interface PostMetaProps extends SpaceProps, FontSizeProps {
   post: {
@@ -14,7 +15,7 @@ interface PostMetaProps extends SpaceProps, FontSizeProps {
   }
 }
 
-const MetaLink = styled(Link)`
+const MetaLink = styled.a`
   color: inherit;
   text-decoration: none;
   &:hover {
@@ -26,7 +27,13 @@ export default ({ post, fontSize, ...spaceProps }: PostMetaProps) => (
   <Flex alignItems='center' {...spaceProps}>
     <Icon path={mdiFileTree} size='12px' />
     <Text ml={1} mr={2} fontSize={fontSize}>
-      <MetaLink href={`/categories/${post.category}`}>{post.category}</MetaLink>
+      <NextLink
+        href={`/categories/[categoryName]?categoryName=${post.category}`}
+        as={`/categories/${post.category}`}
+        passHref
+      >
+        <MetaLink>{post.category}</MetaLink>
+      </NextLink>
     </Text>
     <Flex mr={2}>
       {post.tags.map(tag => (
