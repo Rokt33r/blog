@@ -1,4 +1,4 @@
-import App, { Container, AppContext, AppProps } from 'next/app'
+import App, { Container } from 'next/app'
 import React from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
