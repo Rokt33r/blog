@@ -3,3 +3,4 @@
 /static/generated/*
 !/static/generated/.gitkeep
 /out
+.env
