@@ -1,6 +1,6 @@
 ---
 icon: 😥
-title: 왜 내가 Redux 대신 MobX를 쓰게 되었나
+title: (Korean) 왜 내가 Redux 대신 MobX를 쓰게 되었나
 date: 2018-03-05
 tags: [mobx, redux, typescript]
 category: legacy

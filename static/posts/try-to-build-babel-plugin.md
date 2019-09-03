@@ -1,6 +1,6 @@
 ---
 icon: 🐠
-title: Babel 플러그인을 맛보다!
+title: (Korean) Babel 플러그인을 맛보다!
 date: 2017-01-20
 tags: [babel, webpack, react]
 category: legacy

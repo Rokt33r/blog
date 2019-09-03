@@ -1,6 +1,6 @@
 ---
 icon: 📏
-title: Contribute DefinitelyTyped!
+title: (Korean) Contribute DefinitelyTyped!
 date: 2017-09-08
 tags: [typescript]
 category: legacy

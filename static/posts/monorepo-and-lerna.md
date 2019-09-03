@@ -1,6 +1,6 @@
 ---
 icon: 🐉
-title: Monorepo and Lerna
+title: (Korean) Monorepo and Lerna
 date: 2017-03-09
 tags: [lerna, npm, yarn]
 category: legacy
