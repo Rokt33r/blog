@@ -18,9 +18,12 @@ const HomePage = ({ posts }: HomePageProps) => (
     <section>
       <h2>Recent posts</h2>
       <div>
-        {posts.map(post => (
-          <PostCard key={post.name} post={post} />
-        ))}
+        {posts
+          .slice()
+          .sort((a, b) => b.date.localeCompare(a.date))
+          .map(post => (
+            <PostCard key={post.name} post={post} />
+          ))}
       </div>
     </section>
   </DefaultTemplate>

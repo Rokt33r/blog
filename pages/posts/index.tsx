@@ -12,9 +12,12 @@ const PostsListPage = ({ posts }: PostsListPageProps) => (
   <DefaultTemplate>
     <h1>Posts list</h1>
     <div>
-      {posts.map(post => (
-        <PostCard key={post.name} post={post} />
-      ))}
+      {posts
+        .slice()
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .map(post => (
+          <PostCard key={post.name} post={post} />
+        ))}
     </div>
   </DefaultTemplate>
 )
