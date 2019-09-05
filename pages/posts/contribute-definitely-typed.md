@@ -62,13 +62,12 @@ git clone git@github.com:vfile/vfile.git
 
 ```ts
 declare namespace vfile {
-  interface VFile {
-  }
+  interface VFile {}
 }
 
-declare const vfile: vfile.VFile;
+declare const vfile: vfile.VFile
 
-export = vfile;
+export = vfile
 ```
 
 이제 기본적인 vfile에 대한 설정이 완성되었으므로, `test.ts`로 돌아가면 `import vfile = ...`의 빨간줄이 사라지고 밑으로 매우 많은 양의 타입 에러들이 나타나게 된다.
@@ -82,8 +81,8 @@ export = vfile;
 
 declare namespace vfile {
   interface Point {
-      line: number
-      column: number
+    line: number
+    column: number
   }
 
   interface Position {
@@ -95,46 +94,50 @@ declare namespace vfile {
   }
 
   interface VFileParams {
-    file: string;
-    ruleId: string ;
-    reason: string;
-    line: number | null;
-    column: number | null;
-    location: Unist.Position;
-    source: string | null;
-    fatal?: boolean | null;
+    file: string
+    ruleId: string
+    reason: string
+    line: number | null
+    column: number | null
+    location: Unist.Position
+    source: string | null
+    fatal?: boolean | null
   }
 
-  type Message = (reason: string, position?: Point, ruleId?: string) => VFileMessage;
+  type Message = (
+    reason: string,
+    position?: Point,
+    ruleId?: string
+  ) => VFileMessage
 
-  type Fail = (reason: string, position?: Point, ruleId?: string) => void;
+  type Fail = (reason: string, position?: Point, ruleId?: string) => void
 
-  type Info = (reason: string, position?: Point, ruleId?: string) => void;
+  type Info = (reason: string, position?: Point, ruleId?: string) => void
 
-  type ToString = (encoding?: BufferEncoding) => string;
+  type ToString = (encoding?: BufferEncoding) => string
 
   interface VFile {
-    (input?: string | Buffer | VFile | VFileParams): VFile;
-    message: Message;
-    fail: Fail;
-    info: Info;
-    history: string[];
-    data: {};
-    messages: VFileMessage[];
-    contents: string;
-    path: string;
-    dirname: string;
-    basename: string;
-    stem: string;
-    extname: string;
-    cwd: string;
-    toString: ToString;
+    (input?: string | Buffer | VFile | VFileParams): VFile
+    message: Message
+    fail: Fail
+    info: Info
+    history: string[]
+    data: {}
+    messages: VFileMessage[]
+    contents: string
+    path: string
+    dirname: string
+    basename: string
+    stem: string
+    extname: string
+    cwd: string
+    toString: ToString
   }
 }
 
-declare const vfile: vfile.VFile;
+declare const vfile: vfile.VFile
 
-export = vfile;
+export = vfile
 ```
 
 > `/// <reference types="node" />`는 Node.js에서만 존재하는 `Buffer`와 `BufferEncoding` 타입을 가져오기 위해 필요하다.
@@ -142,15 +145,15 @@ export = vfile;
 이렇게 타이핑을 넣고 다시 `test.ts`를 확인하면 `should set custom props` 이외에는 에러가 없게 된다.
 
 ```ts
-  t.test('should set custom props', function (st) {
-    var testing = [1, 2, 3];
-    var file = vfile({custom: true, testing: testing});
+t.test('should set custom props', function(st) {
+  var testing = [1, 2, 3]
+  var file = vfile({ custom: true, testing: testing })
 
-    st.equal(file.custom, true);
-    st.equal(file.testing, testing);
+  st.equal(file.custom, true)
+  st.equal(file.testing, testing)
 
-    st.end();
-  });
+  st.end()
+})
 ```
 
 이걸 보면 커스텀한 값을 자유롭게 추가 할 수 있게 의도된 것 같다. 단순하게 한다면 `{[key: string]: any}`를 추가해줄 수 있겠지만, 이러면 타입추론이 불가능해지므로 타입스크립트를 쓰는 이유가 많이 사라지게 된다.
@@ -161,28 +164,28 @@ export = vfile;
 declare namespace vfile {
   // 생략...
   interface VFileBase<C> {
-    (input?: string | Buffer): VFile<C>;
-    <C>(input?: string | Buffer | VFile<C> | VFileParams): VFile<C>;
-    message: Message;
-    fail: Fail;
-    info: Info;
-    history: string[];
-    data: {};
-    messages: VFileMessage[];
-    contents: string;
-    path: string;
-    dirname: string;
-    basename: string;
-    stem: string;
-    extname: string;
-    cwd: string;
-    toString: ToString;
+    (input?: string | Buffer): VFile<C>
+    <C>(input?: string | Buffer | VFile<C> | VFileParams): VFile<C>
+    message: Message
+    fail: Fail
+    info: Info
+    history: string[]
+    data: {}
+    messages: VFileMessage[]
+    contents: string
+    path: string
+    dirname: string
+    basename: string
+    stem: string
+    extname: string
+    cwd: string
+    toString: ToString
   }
 
-  type VFile<C> = VFileBase<C> & C;
+  type VFile<C> = VFileBase<C> & C
 }
 
-declare const vfile: vfile.VFile<{}>;
+declare const vfile: vfile.VFile<{}>
 ```
 
 위와 같이 쓸 경우, VFile에 추가 옵션을 넣엇을 때, 그리고 이미 제네릭을 가진 VFile이 새로운 인스턴스를 만들려고 할 때에도 쉽게 이전 제네릭을 계승 시킬 수 있게 된다.
@@ -207,10 +210,10 @@ git clone --depth=1 git@github.com:$자기계정$/DefinitelyTyped.git
 
 우선 필요로 하는 파일은 다음과 같다.
 
--   `index.d.ts`
--   `vfile-tests.ts`
--   `tsconfig.json`
--   `tslint.json`
+- `index.d.ts`
+- `vfile-tests.ts`
+- `tsconfig.json`
+- `tslint.json`
 
 하지만, 위의 파일들을 직접 만드는건 매우 번거로우므로, [DefinitelyTyped]에서는 [`dts-gen`]을 사용할 것을 권하고 있다.
 
@@ -238,28 +241,31 @@ dts-gen --dt --name vfile --template module-function
 
 ```ts
 const file = vfile({
-    path: '~/example.txt',
-    contents: 'Alpha *braavo* charlie.',
-    custom: 'Custom tango',
-    data: {
-        custom: 12345
-    },
-});
+  path: '~/example.txt',
+  contents: 'Alpha *braavo* charlie.',
+  custom: 'Custom tango',
+  data: {
+    custom: 12345
+  }
+})
 
-file.path; // => '~/example.txt'
-file.dirname; // => '~'
+file.path // => '~/example.txt'
+file.dirname // => '~'
 
-file.extname = '.md';
+file.extname = '.md'
 
-file.basename; // => 'example.md'
+file.basename // => 'example.md'
 
-file.basename = 'index.text';
+file.basename = 'index.text'
 
-file.history; // => ['~/example.txt', '~/example.md', '~/index.text']
+file.history // => ['~/example.txt', '~/example.md', '~/index.text']
 
-file.message('`braavo` is misspelt; did you mean `bravo`?', {line: 1, column: 8});
+file.message('`braavo` is misspelt; did you mean `bravo`?', {
+  line: 1,
+  column: 8
+})
 
-console.log(file.messages);
+console.log(file.messages)
 ```
 
 Definitely Typed 루트 디렉토리에서 다음 명령으로 다시 한번 체크 해보자.
@@ -275,7 +281,7 @@ npm run lint vfile
 Definitely Typed는 의도된 방향대로 유저가 사용해 주지 않을 경우까지 테스트 할 수 있게 해준다. 우선 다음 코드를 추가해보자.
 
 ```ts
-const invalid = vfile({path: {something: {is: "wrong"}}})
+const invalid = vfile({ path: { something: { is: 'wrong' } } })
 ```
 
 이 코드는 `path`에 문자열이 아닌 다른 값을 집어 넣고 있으므로 에러를 내고 있다. 이대로 다시 한번 `npm run lint vfile`을 실행하면 에러가 난다.
@@ -284,10 +290,10 @@ const invalid = vfile({path: {something: {is: "wrong"}}})
 
 ```ts
 // $ExpectError
-const invalid = vfile({path: {something: {is: "wrong"}}})
+const invalid = vfile({ path: { something: { is: 'wrong' } } })
 
 // 혹은...
-const invalid = vfile({path: {something: {is: "wrong"}}})// $ExpectError
+const invalid = vfile({ path: { something: { is: 'wrong' } } }) // $ExpectError
 ```
 
 이제 테스트를 다시 해보면 정상적으로 타입에러를 확인해주게 된다.
@@ -302,19 +308,16 @@ PR을 올리고 원작자와 관련자들을 불러서 같이 리뷰를 하고 �
 ## 정리
 
 1. 기존 코드에 있는 테스트와 문서를 활용해서 타이핑을 만든다.
-  - 우선 테스트 코드의 빨간 줄부터 지워나간다.
-  - 인터페이스의 모든 값을 다 확인할 필요는 없고, 보이는 족족 추가해준다.
-  - 값의 타입을 확인하는 Assertion 테스트의 경우는 무시한다.
-  - 문서와 비교해가며 확실하게 검증해나간다.
+   - 우선 테스트 코드의 빨간 줄부터 지워나간다.
+   - 인터페이스의 모든 값을 다 확인할 필요는 없고, 보이는 족족 추가해준다.
+   - 값의 타입을 확인하는 Assertion 테스트의 경우는 무시한다.
+   - 문서와 비교해가며 확실하게 검증해나간다.
 2. Definitely Typed를 포크하고 dts-gen으로 기본 파일을 생성시킨다.
 3. 예제 코드로 타입 테스트 코드를 만든다.
 4. 필요에 따라서 반면교사적인 테스트도 추가해준다. `$ExpectError`
 5. PR을 작성하고, 원작자에게 리뷰를 요청하여 확실하게 마무리한다.
 
 [vinyl]: https://github.com/gulpjs/vinyl
-
 [vfile]: https://github.com/vfile/vfile
-
 [definitelytyped]: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 [dts-gen]: https://github.com/Microsoft/dts-gen
