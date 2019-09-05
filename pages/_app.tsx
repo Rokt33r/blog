@@ -1,68 +1,51 @@
 import App, { Container } from 'next/app'
 import React from 'react'
-import { ThemeProvider, createGlobalStyle } from 'styled-components'
+import { StyleProvider } from '../lib/styles'
+import { MDXProvider } from '@mdx-js/react'
+import MarkdownBox from '../atoms/MarkdownBox'
+import DefaultTemplate from '../templates/DefaultTemplate'
+import Link from '../atoms/Link'
+import Box from '../atoms/Box'
+import PostMeta from '../molecules/PostMeta'
+import Heading from '../atoms/Heading'
 
-const colors = {
-  navy: '#001F3F',
-  blue: '#0074D9',
-  aqua: '#7FDBFF',
-  teal: '#39CCCC',
-  olive: '#3D9970',
-  green: '#2ECC40',
-  lime: '#01FF70',
-  yellow: '#FFDC00',
-  orange: '#FF851B',
-  red: '#FF4136',
-  fuchsia: '#F012BE',
-  purple: '#B10DC9',
-  maroon: '#85144B',
-  white: '#FFFFFF',
-  silver: '#DDDDDD',
-  gray: '#AAAAAA',
-  black: '#111111'
+interface WrapperProps {
+  frontMatter: any
 }
 
-const theme = {
-  breakpoints: ['40em', '52em', '64em', '80em'],
-  badges: {
-    primary: {
-      color: '#FFF',
-      backgroundColor: colors.blue
-    }
-  },
-  colors,
-  textStyles: {
-    monospace: {
-      fontFamily: `'Ubuntu Mono', monospace`
-    },
-    sansSerif: {
-      fontFamily: 'Ubuntu, sans-serif'
-    }
-  }
-}
+const Wrapper: React.FC<WrapperProps> = ({ children, frontMatter }) => (
+  <DefaultTemplate>
+    <Box mt={3}>
+      <Link href='/'>Home</Link>
+    </Box>
 
-const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    color: ${colors.black};
-    font-family: ${theme.textStyles.sansSerif.fontFamily};
-    line-height: 1.625;
-  }
-`
+    <Heading depth={1} fontSize={6} mt={0} mb={3}>
+      {frontMatter.title}
+    </Heading>
 
+    <PostMeta
+      post={{ category: frontMatter.category, tags: frontMatter.tags }}
+      px={2}
+      mb={4}
+    />
+
+    <MarkdownBox>{children}</MarkdownBox>
+  </DefaultTemplate>
+)
 export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
-
     return (
       <Container>
-        <ThemeProvider theme={theme}>
-          <>
-            <GlobalStyle />
+        <MDXProvider
+          components={{
+            wrapper: Wrapper
+          }}
+        >
+          <StyleProvider>
             <Component {...pageProps} />
-          </>
-        </ThemeProvider>
+          </StyleProvider>
+        </MDXProvider>
       </Container>
     )
   }
