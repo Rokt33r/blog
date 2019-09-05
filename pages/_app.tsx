@@ -1,4 +1,4 @@
-import App, { Container } from 'next/app'
+import App from 'next/app'
 import React from 'react'
 import { StyleProvider } from '../lib/styles'
 import { MDXProvider } from '@mdx-js/react'
@@ -8,6 +8,7 @@ import Link from '../atoms/Link'
 import Box from '../atoms/Box'
 import PostMeta from '../molecules/PostMeta'
 import Heading from '../atoms/Heading'
+import Head from 'next/head'
 
 interface WrapperProps {
   frontMatter: any
@@ -15,6 +16,9 @@ interface WrapperProps {
 
 const Wrapper: React.FC<WrapperProps> = ({ children, frontMatter }) => (
   <DefaultTemplate>
+    <Head>
+      <title>{frontMatter.title} - Rokt33r's Lab</title>
+    </Head>
     <Box mt={3}>
       <Link href='/'>Home</Link>
     </Box>
@@ -32,21 +36,20 @@ const Wrapper: React.FC<WrapperProps> = ({ children, frontMatter }) => (
     <MarkdownBox>{children}</MarkdownBox>
   </DefaultTemplate>
 )
+
 export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <Container>
-        <MDXProvider
-          components={{
-            wrapper: Wrapper
-          }}
-        >
-          <StyleProvider>
-            <Component {...pageProps} />
-          </StyleProvider>
-        </MDXProvider>
-      </Container>
+      <MDXProvider
+        components={{
+          wrapper: Wrapper
+        }}
+      >
+        <StyleProvider>
+          <Component {...pageProps} />
+        </StyleProvider>
+      </MDXProvider>
     )
   }
 }
