@@ -1,51 +1,22 @@
-const { getPostMap } = require('./tools/posts')
+const path = require('path')
+const rehypeHighlight = require('rehype-highlight')
 
 module.exports = {
-  webpack: (webpack, config) => {
-    webpack.module.rules.push({
-      test: /\.md$|\.css$|\.jpg$/i,
+  webpack: config => {
+    config.module.rules.push({
+      test: /\.mdx?$/,
       use: [
+        'babel-loader',
         {
-          loader: 'raw-loader'
-        }
+          loader: '@mdx-js/loader',
+          options: {
+            rehypePlugins: [rehypeHighlight]
+          }
+        },
+        path.join(__dirname, './tools/fm-loader')
       ]
     })
-    return webpack
+    return config
   },
-  exportPathMap: async function(
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
-    const postMap = await getPostMap()
-    const pathMap = [...postMap.posts.entries()].reduce(
-      (map, [postName, post]) => {
-        map[`/posts/${postName}`] = {
-          page: '/posts/[postName]',
-          query: {
-            postName
-          }
-        }
-
-        return map
-      },
-      {
-        '/': { page: '/' },
-        '/about': { page: '/about' },
-        '/posts': { page: '/posts' }
-      }
-    )
-
-    ;[...postMap.byCategory.entries()].reduce((map, [categoryName]) => {
-      map[`/categories/${categoryName}`] = {
-        page: '/categories/[categoryName]',
-        query: {
-          categoryName
-        }
-      }
-
-      return map
-    }, pathMap)
-
-    return pathMap
-  }
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
 }
