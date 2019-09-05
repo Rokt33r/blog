@@ -1,5 +1,6 @@
 const path = require('path')
 const rehypeHighlight = require('rehype-highlight')
+const data = require('./generated/posts').default
 
 module.exports = {
   webpack: config => {
@@ -18,5 +19,19 @@ module.exports = {
     })
     return config
   },
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  exportPathMap: async function(defaultPathMap) {
+    return data.categories.reduce(
+      (map, category) => {
+        map[`/categories/${category}`] = {
+          page: '/categories/[category]',
+          query: { category }
+        }
+        return map
+      },
+      {
+        ...defaultPathMap
+      }
+    )
+  }
 }
