@@ -4,3 +4,4 @@
 !/static/generated/.gitkeep
 /out
 .env
+.mdx-data
