@@ -1,13 +1,7 @@
-import React from 'react'
-import Box, { BoxProps } from './Box'
+import Box from './Box'
 import styled from 'styled-components'
-import { convertMarkdownToReact } from '../lib/markdown'
 
-interface MarkdownBoxProps extends BoxProps {
-  children: string
-}
-
-const MarkdownBoxContainer = styled(Box)`
+export default styled(Box)`
   & a {
     color: ${({ theme }) => theme.colors.blue};
     text-decoration: none;
@@ -23,6 +17,7 @@ const MarkdownBoxContainer = styled(Box)`
   }
 
   pre code.hljs {
+    display: block;
     padding: 1.5em;
     border: ${({ theme }) => theme.colors.blue} 2px dashed;
   }
@@ -31,9 +26,3 @@ const MarkdownBoxContainer = styled(Box)`
     padding: 0.2em 0.4em;
   }
 `
-
-export default ({ children, ...boxProps }: MarkdownBoxProps) => (
-  <MarkdownBoxContainer {...(boxProps as any)}>
-    {convertMarkdownToReact(children).contents}
-  </MarkdownBoxContainer>
-)
