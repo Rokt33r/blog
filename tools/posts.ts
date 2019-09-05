@@ -2,29 +2,22 @@ import fs from 'fs'
 import path from 'path'
 import Omc, { transform } from 'ow-my-class'
 import ow from 'ow'
-import util from 'util'
-import { parseFrontmatter } from '../lib/markdown'
+import matter from 'gray-matter'
 
-const readFile = util.promisify(fs.readFile)
-
-const postsDirPath = path.join(process.cwd(), 'static/posts')
+const postsDirPath = path.join(process.cwd(), 'pages/posts')
 
 export async function getPostMap() {
   const postFileNames = fs.readdirSync(postsDirPath)
   return Promise.all(
-    postFileNames.map(async fileName => {
-      const content = await readPostFile(fileName)
-      const name = fileName.substring(0, fileName.length - 3)
-      return validatePost(name, content)
-    })
+    postFileNames
+      .filter(fileName => fileName.endsWith('.md'))
+      .map(async fileName => {
+        const { data } = matter(
+          fs.readFileSync(path.join(postsDirPath, fileName))
+        )
+        return validatePost(data, path.basename(fileName, '.md'))
+      })
   ).then(mapData)
-}
-
-async function readPostFile(fileName: string) {
-  const filePath = path.join(postsDirPath, fileName)
-  const fileBuffer = await readFile(filePath)
-
-  return fileBuffer.toString('utf-8')
 }
 
 class Post {
@@ -33,9 +26,6 @@ class Post {
 
   @Omc(ow.string)
   title!: string
-
-  @Omc(ow.string)
-  content!: string
 
   @Omc(ow.date)
   date!: Date
@@ -53,11 +43,10 @@ class Post {
   category!: string
 }
 
-function validatePost(name: string, content: string) {
+function validatePost(data: any, name: string) {
   return transform(
     {
-      ...parseFrontmatter(content),
-      content,
+      ...data,
       name
     },
     Post

@@ -1,18 +1,13 @@
 import React from 'react'
 import DefaultTemplate from '../../templates/DefaultTemplate'
 import PostCard from '../../molecules/PostCard'
-import { PostWithoutContent } from '../../lib/types'
-import { getGeneratedJSONFile } from '../../lib/assets'
+import data from '../../generated/posts'
 
-interface PostsListPageProps {
-  posts: PostWithoutContent[]
-}
-
-const PostsListPage = ({ posts }: PostsListPageProps) => (
+export default () => (
   <DefaultTemplate>
     <h1>Posts list</h1>
     <div>
-      {posts
+      {data.posts
         .slice()
         .sort((a, b) => b.date.localeCompare(a.date))
         .map(post => (
@@ -21,9 +16,3 @@ const PostsListPage = ({ posts }: PostsListPageProps) => (
     </div>
   </DefaultTemplate>
 )
-
-PostsListPage.getInitialProps = async () => {
-  return getGeneratedJSONFile('posts')
-}
-
-export default PostsListPage

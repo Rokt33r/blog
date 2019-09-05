@@ -13,8 +13,8 @@ Redux 사용에 있어서 아쉬웠던 점들과 그걸 고쳐나간 경험을 �
 
 1. Memoization이 안된다.
 2. 비효율적인 리듀싱
-  - 액션마다 렌더를 다시 시킨다.(Batched actions 처리에 불리)
-  - 모든 리듀서에 액션을 넘겨준다.(combineReducers)
+   - 액션마다 렌더를 다시 시킨다.(Batched actions 처리에 불리)
+   - 모든 리듀서에 액션을 넘겨준다.(combineReducers)
 3. 깊은 구조를 다루기 힘들다.
 
 하나씩 까엎어보자.
@@ -40,11 +40,11 @@ Reselect는 2개의 단계로 Redux의 스테이트로부터 계산식에 필요
 import { createSelector } from 'reselect'
 
 // 스테이트에서 어떤 값을 인수로 쓸지 찾아주는 함수들이다.
-const getVisibilityFilter = (state) => state.visibilityFilter
-const getTodos = (state) => state.todos
+const getVisibilityFilter = state => state.visibilityFilter
+const getTodos = state => state.todos
 
 export const getVisibleTodos = createSelector(
-  [ getVisibilityFilter, getTodos ],
+  [getVisibilityFilter, getTodos],
   // 찾아진 인수에 대해 계산을 행한다.
   (visibilityFilter, todos) => {
     switch (visibilityFilter) {
@@ -83,7 +83,7 @@ const sagaMiddleware = createSagaMiddleware()
 const middlewareEnhancer = applyMiddleware(sampleMiddleware)
 const enhancer = compose<Redux.StoreEnhancerStoreCreator<State>>(
   middlewareEnhancer,
-  batchEnhancer(sagaMiddleware),
+  batchEnhancer(sagaMiddleware)
   // Saga를 쓰지 않는다면, 미들웨어를 넘겨주지 않아도 된다.
   // batchEnhancer(),
 )
@@ -93,30 +93,30 @@ const store = createStore(reducer, enhancer)
 // 이제 배열로 디스패치가 가능하다.
 store.dispatch([
   {
-    type: 'SayHello',
+    type: 'SayHello'
   },
   {
-    type: 'SayHello',
+    type: 'SayHello'
   },
   {
-    type: 'SayHello',
-  },
+    type: 'SayHello'
+  }
 ])
 
 // `put` 이펙트에서도 똑같이 쓸 수 있다.
-function * saga () {
+function* saga() {
   while (true) {
     yield take('SayHello')
     yield put([
       {
-        type: 'SayBye',
+        type: 'SayBye'
       },
       {
-        type: 'SayBye',
+        type: 'SayBye'
       },
       {
-        type: 'SayBye',
-      },
+        type: 'SayBye'
+      }
     ])
   }
 }
@@ -138,22 +138,23 @@ Switch보다 인덱싱에서 유리한 고지를 점할 수 있다.(Map은 키�
 ```ts
 import { createStore } from 'redux'
 import { MappedPipeReducer } from 'typed-redux-kit.mapped-reducer'
-import {
-  PureAction,
-  PayloadAction,
-} from 'typed-redux-kit.base'
+import { PureAction, PayloadAction } from 'typed-redux-kit.base'
 
 enum ActionTypes {
   Plus = 'test_Plus',
-  Set = 'test_Set',
+  Set = 'test_Set'
 }
 
 namespace Actions {
   export interface Plus extends PureAction<ActionTypes.Plus> {}
 
-  export interface Set extends PayloadAction<ActionTypes.Set, {
-    count: number
-  }> {}
+  export interface Set
+    extends PayloadAction<
+      ActionTypes.Set,
+      {
+        count: number
+      }
+    > {}
 }
 
 interface State {
@@ -162,35 +163,32 @@ interface State {
 
 const plusReducer = (state: State, action: Actions.PlusAction) => ({
   ...state,
-  count: state.count + 1,
+  count: state.count + 1
 })
 
 const setReducer = (state: State, action: Actions.SetAction) => ({
   ...state,
-  ...action.payload,
+  ...action.payload
 })
 
 // 초기 스테이트는 스토어에 넣어줘도 된다.
 const reducer = new MappedPipeReducer<State>({
   initialState: {
-    count: 0,
-  },
+    count: 0
+  }
 })
 
 reducer
   .set(ActionTypes.Plus, plusReducer)
   .set(ActionTypes.Set, setReducer)
   // 복수의 액션타입에 대해서도 간단히 배열로 넣어줄 수 있다.
-  .set([
-    ActionTypes.Plus,
-    ActionTypes.Set,
-  ], anotherReducer)
+  .set([ActionTypes.Plus, ActionTypes.Set], anotherReducer)
   // String enum도 따로 변환없이 바로 넣어줄 수 있다.
   .set(ActionTypes, yetAnotherReducer)
 
 const store = createStore(reducer.reduce)
 store.dispatch({
-  type: ActionTypes.Plus,
+  type: ActionTypes.Plus
 } as Actions.Plus)
 ```
 
@@ -208,9 +206,9 @@ const myReducer = (state, action) => ({
       depth3: {
         ...state.depth1.depth2.depth3,
         depth4: action.payload
-      },
-    },
-  },
+      }
+    }
+  }
 })
 ```
 
@@ -219,9 +217,8 @@ const myReducer = (state, action) => ({
 이에 페이스북이 만든 Immutable.js는 더 나은 API로 이를 쉽게 다루게 해준다.
 
 ```ts
-const myReducer = (state, action) => (
+const myReducer = (state, action) =>
   state.setIn(['depth1', 'depth2', 'depth3', 'depth4'], action.payload)
-)
 ```
 
 근데, 문제점은... `getIn`, `setIn`, `...In`과 같은 메소드는 문자열의 배열로 키들을 가져와서 값을
@@ -231,16 +228,14 @@ const myReducer = (state, action) => (
 이를 타입스크립트로 틀어막기위해선 `...In`을 쓰면 안되는데, 그러면...:
 
 ```ts
-const myReducer = (state, action) => (
-  state
-    .update('depth1', depth1 => depth1
-      .update('depth2', depth2 => depth2
-        .update('depth3', depth3 => depth3
-          .update('depth4', depth4 => action.payload)
-        )
+const myReducer = (state, action) =>
+  state.update('depth1', depth1 =>
+    depth1.update('depth2', depth2 =>
+      depth2.update('depth3', depth3 =>
+        depth3.update('depth4', depth4 => action.payload)
       )
     )
-)
+  )
 ```
 
 또 다른 피라미드가 생긴다.
@@ -252,23 +247,20 @@ Trackable은 말그대로 추적을 해주는 데이터 구조체로 값이 변�
 
 ```ts
 import * as Redux from 'redux'
-import {
-  trackEnhancer,
-  TrackableRecord,
-} from '../lib'
+import { trackEnhancer, TrackableRecord } from '../lib'
 
 const CountRecord = TrackableRecord({
-  count: 0,
+  count: 0
 })
 type CountRecord = TrackableRecord<{
   count: number
 }>
 type State = TrackableMap<string, CountRecord>
 const defaultChildState = CountRecord({
-  count: 0,
+  count: 0
 })
 const defaultState: State = new TrackableMap({
-  a: defaultChildState,
+  a: defaultChildState
 })
 
 const myReducer = (state: State = defaultState, action: Redux.Action) => {
@@ -282,7 +274,7 @@ const myReducer = (state: State = defaultState, action: Redux.Action) => {
 const store = Redux.createStore(myReducer, trackEnhancer)
 
 store.dispatch({
-  type: 'add',
+  type: 'add'
 })
 
 const reducedState = store.getState()
@@ -312,7 +304,7 @@ expect(reducedState).not.toBe(defaultState)
 어쩌면 CLI같은걸 만들어서 해결할 수 있지 않을까 라는 상상도 하는데 일단은 좀 더 유즈케이스를 늘려서
 힌트를 찾으러 다녀야겠다.
 
-[reselect]:https://github.com/reactjs/reselect
-[batch enhancer]:https://github.com/Revisolution/typed-redux-kit/blob/master/packages/batch-enhancer/readme.md
-[mapped reducer]:https://github.com/Revisolution/typed-redux-kit/blob/master/packages/mapped-reducer/readme.md
-[trackable]:https://github.com/Revisolution/typed-redux-kit/blob/master/packages/trackable/readme.md
+[reselect]: https://github.com/reactjs/reselect
+[batch enhancer]: https://github.com/Revisolution/typed-redux-kit/blob/master/packages/batch-enhancer/readme.md
+[mapped reducer]: https://github.com/Revisolution/typed-redux-kit/blob/master/packages/mapped-reducer/readme.md
+[trackable]: https://github.com/Revisolution/typed-redux-kit/blob/master/packages/trackable/readme.md

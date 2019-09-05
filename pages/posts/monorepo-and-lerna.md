@@ -54,9 +54,7 @@ Babel 역시 독립적으로 관리합니다.
 ```json
 {
   "lerna": "2.0.0-beta.38",
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "version": "independent"
 }
 ```

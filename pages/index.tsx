@@ -2,14 +2,9 @@ import React from 'react'
 import DefaultTemplate from '../templates/DefaultTemplate'
 import PostCard from '../molecules/PostCard'
 import Heading from '../atoms/Heading'
-import { getGeneratedJSONFile } from '../lib/assets'
-import { PostWithoutContent } from '../lib/types'
+import data from '../generated/posts'
 
-interface HomePageProps {
-  posts: PostWithoutContent[]
-}
-
-const HomePage = ({ posts }: HomePageProps) => (
+export default () => (
   <DefaultTemplate>
     <header>
       <Heading depth={1}>Rokt33r's Lab</Heading>
@@ -18,7 +13,7 @@ const HomePage = ({ posts }: HomePageProps) => (
     <section>
       <h2>Recent posts</h2>
       <div>
-        {posts
+        {data.posts
           .slice()
           .sort((a, b) => b.date.localeCompare(a.date))
           .map(post => (
@@ -28,9 +23,3 @@ const HomePage = ({ posts }: HomePageProps) => (
     </section>
   </DefaultTemplate>
 )
-
-HomePage.getInitialProps = () => {
-  return getGeneratedJSONFile('posts')
-}
-
-export default HomePage

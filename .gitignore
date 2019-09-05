@@ -1,6 +1,7 @@
 /node_modules
 .next
-/static/generated/*
-!/static/generated/.gitkeep
+/generated/*
+!/generated/.gitkeep
 /out
 .env
+.mdx-data
