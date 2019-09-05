@@ -2,8 +2,7 @@ import React from 'react'
 import DefaultTemplate from '../templates/DefaultTemplate'
 import PostCard from '../molecules/PostCard'
 import Heading from '../atoms/Heading'
-import { PostWithoutContent } from '../lib/types'
-import data from '../static/generated/posts.json'
+import data from '../generated/posts'
 
 export default () => (
   <DefaultTemplate>
@@ -14,7 +13,7 @@ export default () => (
     <section>
       <h2>Recent posts</h2>
       <div>
-        {(data.posts as PostWithoutContent[])
+        {data.posts
           .slice()
           .sort((a, b) => b.date.localeCompare(a.date))
           .map(post => (

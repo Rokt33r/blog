@@ -4,19 +4,17 @@ import PostCard from '../../molecules/PostCard'
 import Link from '../../atoms/Link'
 import Box from '../../atoms/Box'
 import Heading from '../../atoms/Heading'
-import { PostWithoutContent } from '../../lib/types'
 import { NextComponentType, NextPageContext } from 'next'
 import { ParsedUrlQuery } from 'querystring'
-import data from '../../static/generated/posts.json'
+import data from '../../generated/posts'
 
 const CategoryShow: NextComponentType<
   NextPageContext,
   { query: ParsedUrlQuery },
   { query: ParsedUrlQuery }
 > = ({ query }) => {
-  const posts = (data.posts as PostWithoutContent[]).filter(
-    post => post.category === query.category
-  )
+  const posts = data.posts.filter(post => post.category === query.category)
+
   return (
     <DefaultTemplate>
       <Box mt={3}>
