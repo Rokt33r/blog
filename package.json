@@ -36,11 +36,8 @@
     "styled-system": "^5.1.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@mdx-js/loader": "^1.4.3",
-    "@mdx-js/react": "^1.4.3",
-    "@next/mdx": "^8.1.0",
+    "@mdx-js/loader": "^1.4.4",
+    "@mdx-js/react": "^1.4.4",
     "@types/js-yaml": "^3.12.1",
     "@types/node": "^12.7.4",
     "@types/ramda": "^0.26.21",
@@ -49,7 +46,6 @@
     "@types/styled-components": "^4.1.18",
     "@types/styled-system": "^5.1.1",
     "@types/typography": "^0.16.3",
-    "babel-plugin-parameter-decorator": "^1.0.9",
     "babel-plugin-styled-components": "^1.10.6",
     "del": "^5.1.0",
     "env-cmd": "^9.0.3",
