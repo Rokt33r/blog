@@ -24,10 +24,6 @@ category: legacy
 
 Git의 커밋상태를 확인하여 변경된 패키지만 일괄적으로 NPM으로 배포하는 것이 가능하고 동시에 리모트 리포지터리까지 푸시해줍니다. 아직 베타버젼이긴해도 매우매우 편리했어요. :100::100:
 
-<img src="/assets/images/lerna.png" alt="Lerna Logo" width="300">
-
-로고부터 모노리포의 특징을 잘 나타내주고 있네요!
-
 # 사용법
 
 ## `lerna init`
