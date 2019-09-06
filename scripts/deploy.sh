@@ -1,4 +1,5 @@
 cd out
+touch .nojekyll
 git init
 git add -A
 git commit -a -m "Deployed at $(date)"
