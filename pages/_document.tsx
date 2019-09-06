@@ -37,6 +37,7 @@ export default class MyDocument extends Document {
             rel='stylesheet'
           />
           <link href='/static/highlight.js-style.css' rel='stylesheet' />
+          <link href='/static/nprogress.css' rel='stylesheet' />
         </Head>
         <body>
           <Main />
