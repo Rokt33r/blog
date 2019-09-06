@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Flex from '../atoms/Flex'
 import Text from '../atoms/Text'
+import Link from '../atoms/Link'
 import Icon from '@mdi/react'
 import { mdiFileTree } from '@mdi/js'
 import { SpaceProps, FontSizeProps } from 'styled-system'
@@ -12,17 +13,17 @@ interface PostMetaProps extends SpaceProps, FontSizeProps {
     category: string
     tags: string[]
   }
+  editLink?: string
 }
 
 const MetaLink = styled.a`
   color: inherit;
-  text-decoration: none;
   &:hover {
-    text-decoration: underline;
+    color: ${({ theme }) => theme.colors.blue};
   }
 `
 
-export default ({ post, fontSize, ...spaceProps }: PostMetaProps) => (
+export default ({ post, fontSize, editLink, ...spaceProps }: PostMetaProps) => (
   <Flex alignItems='center' {...spaceProps}>
     <Icon path={mdiFileTree} size='12px' />
     <Text ml={1} mr={2} fontSize={fontSize}>
@@ -41,5 +42,10 @@ export default ({ post, fontSize, ...spaceProps }: PostMetaProps) => (
         </Text>
       ))}
     </Flex>
+    {editLink != null && (
+      <Link href={editLink} newTab>
+        Suggest Edit
+      </Link>
+    )}
   </Flex>
 )

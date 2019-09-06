@@ -12,9 +12,14 @@ import Head from 'next/head'
 
 interface WrapperProps {
   frontMatter: any
+  filePathname: string
 }
 
-const Wrapper: React.FC<WrapperProps> = ({ children, frontMatter }) => (
+const Wrapper: React.FC<WrapperProps> = ({
+  children,
+  frontMatter,
+  filePathname
+}) => (
   <DefaultTemplate>
     <Head>
       <title>{frontMatter.title} - Rokt33r's Lab</title>
@@ -31,9 +36,10 @@ const Wrapper: React.FC<WrapperProps> = ({ children, frontMatter }) => (
       post={{ category: frontMatter.category, tags: frontMatter.tags }}
       px={2}
       mb={4}
+      editLink={`https://github.com/Rokt33r/blog/edit/master${filePathname}`}
     />
 
-    <MarkdownBox>{children}</MarkdownBox>
+    <MarkdownBox mb={5}>{children}</MarkdownBox>
   </DefaultTemplate>
 )
 

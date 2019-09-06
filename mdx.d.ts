@@ -28,6 +28,7 @@ declare module '@mdx-js/react' {
   export type Components = {
     wrapper: React.ComponentType<{
       frontMatter: any
+      filePathname: string
       children: React.ReactNode
     }>
     [key in ComponentType]?: React.ComponentType<{ children: React.ReactNode }>

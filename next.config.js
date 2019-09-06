@@ -14,6 +14,7 @@ module.exports = {
             rehypePlugins: [rehypeHighlight]
           }
         },
+        path.join(__dirname, './tools/filePathname-loader'),
         path.join(__dirname, './tools/fm-loader')
       ]
     })
