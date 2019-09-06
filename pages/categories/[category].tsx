@@ -4,15 +4,11 @@ import PostCard from '../../molecules/PostCard'
 import Link from '../../atoms/Link'
 import Box from '../../atoms/Box'
 import Heading from '../../atoms/Heading'
-import { NextComponentType, NextPageContext } from 'next'
-import { ParsedUrlQuery } from 'querystring'
 import data from '../../generated/posts'
+import { useRouter } from 'next/router'
 
-const CategoryShow: NextComponentType<
-  NextPageContext,
-  { query: ParsedUrlQuery },
-  { query: ParsedUrlQuery }
-> = ({ query }) => {
+export default ({}) => {
+  const { query } = useRouter()
   const posts = data.posts.filter(post => post.category === query.category)
 
   return (
@@ -31,9 +27,3 @@ const CategoryShow: NextComponentType<
     </DefaultTemplate>
   )
 }
-
-CategoryShow.getInitialProps = ctx => {
-  return { query: ctx.query }
-}
-
-export default CategoryShow
