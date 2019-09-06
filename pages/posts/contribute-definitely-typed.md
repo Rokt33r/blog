@@ -3,7 +3,7 @@ icon: 📏
 title: (Korean) Contribute DefinitelyTyped!
 date: 2017-09-08
 tags: [typescript]
-category: legacy
+category: dev-kor
 ---
 
 자바스크립트 라이브러리를 타입스크립트에서도 쓸 수 있도록 타이핑을 정의해보자!

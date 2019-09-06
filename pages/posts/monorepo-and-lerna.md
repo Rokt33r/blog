@@ -3,7 +3,7 @@ icon: 🐉
 title: (Korean) Monorepo and Lerna
 date: 2017-03-09
 tags: [lerna, npm, yarn]
-category: legacy
+category: dev-kor
 ---
 
 제가 만든 [Remark Math](https://github.com/Rokt33r/remark-math)를 배포하면서 모노리포를 구현하기 위해 [Lerna]를 사용한 노하우를 공유합니다.

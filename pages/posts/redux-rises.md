@@ -3,7 +3,7 @@ icon: ✊
 title: (Korean) Redux 굴기(崛起)
 date: 2017-09-10
 tags: [redux, typescript]
-category: legacy
+category: dev-kor
 ---
 
 Redux 사용에 있어서 아쉬웠던 점들과 그걸 고쳐나간 경험을 써보려 한다.

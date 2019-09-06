@@ -3,7 +3,7 @@ icon: 💄
 title: (Korean) Rogue 대신 Codemirror!
 date: 2017-01-19
 tags: [codemirror, jekyll]
-category: legacy
+category: dev-kor
 ---
 
 신택스 하이라이트에 JSX가 제대로 작동하지 않는 듯해서 jneen/rouge의 이슈트래커를 보니 [이런 코멘트](https://github.com/jneen/rouge/issues/275#issuecomment-149714664)가 있어서 놀랬습니다.

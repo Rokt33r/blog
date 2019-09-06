@@ -3,7 +3,7 @@ icon: 🐠
 title: (Korean) Babel 플러그인을 맛보다!
 date: 2017-01-20
 tags: [babel, webpack, react]
-category: legacy
+category: dev-kor
 ---
 
 개인적으로 [리액트 공식 튜토리얼의 방식](https://facebook.github.io/react/docs/handling-events.html)이 마음에 들지않았어요.
