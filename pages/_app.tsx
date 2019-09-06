@@ -9,6 +9,7 @@ import Box from '../atoms/Box'
 import PostMeta from '../molecules/PostMeta'
 import Heading from '../atoms/Heading'
 import Head from 'next/head'
+import NextLink from 'next/link'
 
 interface WrapperProps {
   frontMatter: any
@@ -25,7 +26,9 @@ const Wrapper: React.FC<WrapperProps> = ({
       <title>{frontMatter.title} - Rokt33r's Lab</title>
     </Head>
     <Box mt={3}>
-      <Link href='/'>Home</Link>
+      <NextLink href='/' passHref>
+        <Link>Home</Link>
+      </NextLink>
     </Box>
 
     <Heading depth={1} fontSize={6} mt={0} mb={3}>

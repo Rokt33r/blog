@@ -5,6 +5,7 @@ import Link from '../../atoms/Link'
 import Box from '../../atoms/Box'
 import Heading from '../../atoms/Heading'
 import data from '../../generated/posts'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
 export default ({}) => {
@@ -14,7 +15,9 @@ export default ({}) => {
   return (
     <DefaultTemplate>
       <Box mt={3}>
-        <Link href='/'>Home</Link>
+        <NextLink href='/' passHref>
+          <Link>Home</Link>
+        </NextLink>
       </Box>
       <Heading depth={1} mt={0} mb={3}>
         Category: {query.category}

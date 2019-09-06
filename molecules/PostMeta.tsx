@@ -43,7 +43,7 @@ export default ({ post, fontSize, editLink, ...spaceProps }: PostMetaProps) => (
       ))}
     </Flex>
     {editLink != null && (
-      <Link href={editLink} newTab>
+      <Link href={editLink} target='_blank'>
         Suggest Edit
       </Link>
     )}

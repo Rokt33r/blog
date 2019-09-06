@@ -19,17 +19,17 @@ const AboutPage = () => (
 
     <ul>
       <li>
-        <Link href='https://github.com/rokt33r' newTab>
+        <Link href='https://github.com/rokt33r' target='_blank'>
           Github
         </Link>
       </li>
       <li>
-        <Link href='https://twitter.com/rokt33r' newTab>
+        <Link href='https://twitter.com/rokt33r' target='_blank'>
           Twitter
         </Link>
       </li>
       <li>
-        <Link href='https://spectrum.chat/users/rokt33r' newTab>
+        <Link href='https://spectrum.chat/users/rokt33r' target='_blank'>
           Spectrum
         </Link>
       </li>
@@ -96,19 +96,19 @@ const AboutPage = () => (
     <h2>🏃 Current Projects</h2>
     <ul>
       <li>
-        <Link href='https://github.com/BoostIO/Boostnote' newTab>
+        <Link href='https://github.com/BoostIO/Boostnote' target='_blank'>
           Boostnote
         </Link>{' '}
         (Project owner) : Note app for developers.
       </li>
       <li>
-        <Link href='https://github.com/prismyland' newTab>
+        <Link href='https://github.com/prismyland' target='_blank'>
           Prismy
         </Link>{' '}
         (Project owner) : Simple server library written in Typescript.
       </li>
       <li>
-        <Link href='https://github.com/remarkjs/remark' newTab>
+        <Link href='https://github.com/remarkjs/remark' target='_blank'>
           Remark.js
         </Link>{' '}
         (Contributor) : Markdown processor library.
@@ -118,7 +118,7 @@ const AboutPage = () => (
     <h2>❄️ Frozen Projects</h2>
     <ul>
       <li>
-        <Link href='https://github.com/BoostIO/tachijs' newTab>
+        <Link href='https://github.com/BoostIO/tachijs' target='_blank'>
           Tachijs
         </Link>{' '}
         (Project owner) : Highly testable dead simple web server written in
@@ -131,14 +131,14 @@ const AboutPage = () => (
       <li>
         <Link
           href='https://opensource.tokyo/n/na301c1932f54?magazine_key=m176b7596d140'
-          newTab
+          target='_blank'
         >
           日本には「企業主導のオープンソース推進」が必要だ。世界10ヶ国に開発拠点を構えるLINEのOSS支援体制
           - 2019.07.23
         </Link>
       </li>
       <li>
-        <Link href='https://type.jp/et/feature/9888' newTab>
+        <Link href='https://type.jp/et/feature/9888' target='_blank'>
           『IssueHunt』によってエンジニアの未来はどう変わる？
           オープンソースの新たな可能性に迫る - 2019.02.22
         </Link>
