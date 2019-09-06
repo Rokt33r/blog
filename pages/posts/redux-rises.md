@@ -1,6 +1,6 @@
 ---
 icon: ✊
-title: (Korean) Redux 굴기(崛起)
+title: Redux 굴기(崛起)
 date: 2017-09-10
 tags: [redux, typescript]
 category: dev-kor

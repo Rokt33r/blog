@@ -1,6 +1,6 @@
 ---
 icon: 📏
-title: (Korean) Contribute DefinitelyTyped!
+title: Contribute에 기여해보다!
 date: 2017-09-08
 tags: [typescript]
 category: dev-kor

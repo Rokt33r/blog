@@ -1,6 +1,6 @@
 ---
 icon: 💄
-title: (Korean) Rogue 대신 Codemirror!
+title: Rogue 대신 Codemirror!
 date: 2017-01-19
 tags: [codemirror, jekyll]
 category: dev-kor
