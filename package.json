@@ -11,11 +11,11 @@
     "start": "hs out",
     "lint": "prettier --check ./**/*.{ts,tsx,md}",
     "format": "prettier --write ./**/*.{ts,tsx,md}",
-    "build": "npm run next build && npm run next export",
+    "build": "npm run posts && npm run next build && npm run next export",
     "posts": "npm run ts scripts/posts.ts",
     "test": "npm run lint && npm run test-types",
     "test-types": "tsc",
-    "deploy": "env-cmd sh scripts/deploy.sh"
+    "deploy": "sh scripts/deploy.sh"
   },
   "keywords": [],
   "author": "Junyoung Choi<rokt33r.choi@gmail.com>",
@@ -48,7 +48,6 @@
     "@types/typography": "^0.16.3",
     "babel-plugin-styled-components": "^1.10.6",
     "del": "^5.1.0",
-    "env-cmd": "^9.0.3",
     "gray-matter": "^4.0.2",
     "loader-utils": "^1.2.3",
     "prettier": "^1.18.2",
