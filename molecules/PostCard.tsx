@@ -39,11 +39,7 @@ export default ({ post }: PostCardProps) => (
     <Flex alignItems='center'>
       <Heading depth={2} fontSize={3} css={{ flex: 1 }} m={0}>
         {post.icon}{' '}
-        <NextLink
-          href={`/posts/[postName]?postName=${post.name}`}
-          as={`/posts/${post.name}`}
-          passHref
-        >
+        <NextLink href={`/posts/${post.name}`} passHref>
           <CardLink>
             <span className='title'>{post.title}</span>
           </CardLink>
