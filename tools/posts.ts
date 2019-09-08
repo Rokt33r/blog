@@ -41,6 +41,9 @@ class Post {
 
   @Omc(ow.string)
   category!: string
+
+  @Omc(ow.optional.boolean)
+  draft?: boolean
 }
 
 function validatePost(data: any, name: string) {

@@ -14,7 +14,7 @@ export default () => (
       <h2>Recent posts</h2>
       <div>
         {data.posts
-          .slice()
+          .filter(post => !post.draft)
           .sort((a, b) => b.date.localeCompare(a.date))
           .map(post => (
             <PostCard key={post.name} post={post} />

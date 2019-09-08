@@ -10,7 +10,9 @@ import { useRouter } from 'next/router'
 
 export default ({}) => {
   const { query } = useRouter()
-  const posts = data.posts.filter(post => post.category === query.category)
+  const posts = data.posts.filter(
+    post => !post.draft && post.category === query.category
+  )
 
   return (
     <DefaultTemplate>
