@@ -16,7 +16,7 @@ interface DefaultTemplateProps {
 export default ({ children }: DefaultTemplateProps) => (
   <Flex>
     <Navigator />
-    <Container mx='auto' px={4} pb={6} width={1}>
+    <Container mt={[3, 0]} mx='auto' px={[2, 4]} pb={6} width={1}>
       {children}
       <Box my={5} as='footer'>
         <Flex justifyContent='center'>

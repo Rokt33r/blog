@@ -1,27 +1,51 @@
-import React from 'react'
-import Box, { BoxProps } from '../atoms/Box'
+import React, { useState, useEffect } from 'react'
+import Box, { BoxProps, composedBoxStyle } from '../atoms/Box'
 import Text from '../atoms/Text'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import data from '../generated/posts'
 import Link from 'next/link'
 import Icon from '@mdi/react'
-import { mdiFileTree } from '@mdi/js'
+import { mdiFileTree, mdiMenu, mdiClose } from '@mdi/js'
 import Flex from '../atoms/Flex'
+import {
+  compose,
+  position,
+  PositionProps,
+  height,
+  HeightProps,
+  display,
+  DisplayProps
+} from 'styled-system'
 
-const NavContainer = styled(Box)({
-  height: '100vh',
-  top: 0,
-  position: 'sticky'
-})
+const NavContainer = styled.div<BoxProps & PositionProps & HeightProps>(
+  {},
+  compose(
+    composedBoxStyle,
+    position,
+    height
+  )
+)
 
-const NavLinkList = styled(Box).attrs({
-  as: 'ul'
-})`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`
+const NavLinkList = styled.ul<BoxProps & DisplayProps>(
+  {
+    listStyle: 'none',
+    padding: 0,
+    margin: 0
+  },
+  compose(
+    composedBoxStyle,
+    display
+  )
+)
+
+const NavControl = styled.div<BoxProps & DisplayProps>(
+  {},
+  compose(
+    composedBoxStyle,
+    display
+  )
+)
 
 const Avartar = styled(Box).attrs({
   as: 'img',
@@ -30,6 +54,14 @@ const Avartar = styled(Box).attrs({
   height: 20,
   mr: 2
 })``
+
+const NavControlButton = styled.button<BoxProps>`
+  ${composedBoxStyle}
+  border: none;
+  background-color: white;
+  outline: none;
+  font-size: 1.4em;
+`
 
 interface NavLinkListItemProps extends BoxProps {
   href: string
@@ -77,9 +109,30 @@ const NavLinkListItem = ({
 }
 
 export default () => {
+  const [closed, setClosed] = useState(true)
+  const { asPath } = useRouter()
+  useEffect(() => {
+    setClosed(true)
+  }, [asPath])
+
   return (
-    <NavContainer width={[1, 256]}>
-      <NavLinkList>
+    <NavContainer
+      width={[1, 256]}
+      position={['fixed', 'sticky']}
+      backgroundColor='white'
+      top={0}
+      height={[closed ? 'inherit' : '100vh', '100vh']}
+    >
+      <NavControl display={['block', 'none']}>
+        <NavControlButton py={1} onClick={() => setClosed(!closed)}>
+          {closed ? (
+            <Icon color='black' size='1em' path={mdiMenu} />
+          ) : (
+            <Icon path={mdiClose} color='black' size='1em' />
+          )}
+        </NavControlButton>
+      </NavControl>
+      <NavLinkList display={[closed ? 'none' : 'block', 'block']}>
         <NavLinkListItem href='/' fontSize='3'>
           <Avartar />
           Rokt33r's Lab

@@ -2,6 +2,7 @@ import Box from './Box'
 import styled from 'styled-components'
 
 export default styled(Box)`
+  overflow-wrap: break-word;
   & a {
     color: ${({ theme }) => theme.colors.blue};
     text-decoration: none;
