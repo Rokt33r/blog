@@ -49,6 +49,7 @@ class Post {
 function validatePost(data: any, name: string) {
   return transform(
     {
+      draft: false,
       ...data,
       name
     },

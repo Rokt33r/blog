@@ -6,6 +6,7 @@ export interface Post {
   category: string
   tags: string[]
   date: string
+  draft?: boolean
 }
 
 export type PostWithoutContent = Omit<Post, 'content'>
