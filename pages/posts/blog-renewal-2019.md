@@ -1,10 +1,9 @@
 ---
 icon: 🔨
 title: Blog renewal 2019
-date: 2019-09-07
+date: 2019-09-24
 tags: [nextjs, mdx, remark]
 category: dev
-draft: true
 ---
 
 I've renewed my blog with Typescript, Next.js and MDX to start blogging again. So in this article, I want to share how I renewed my blog.
